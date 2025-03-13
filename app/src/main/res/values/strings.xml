@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">KepmmiApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="category">Kategori</string>
+    <string name="image_slider">Gambar Slider</string>
+    <string name="kegiatan_baru">Kegiatan Terbaru</string>
+    <string name="email">Email</string>
+    <string name="login_header">Login</string>
+    <string name="password">Kata Sandi</string>
+    <string name="login">Masuk</string>
+    <string name="create_account">Buat Akun</string>
+    <string name="already_have_account">Sudah Punya Akun?</string>
+    <string name="login_here">Login</string>
+    <string name="register">Daftar</string>
+    <string name="daftar">Daftar Anggota</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profil">Profil</string>
+    <string name="kegiatan">Kegiatan</string>
+    <string name="info">Info</string>
+    <string name="galeri">Galeri</string>
+</resources>

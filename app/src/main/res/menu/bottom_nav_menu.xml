@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_kegiatan"
+        android:icon="@drawable/ic_library_books"
+        android:title="@string/kegiatan" />
+
+    <item
+        android:id="@+id/navigation_page"
+        android:icon="@drawable/ic_info"
+        android:title="@string/info" />
+
+    <item
+        android:id="@+id/navigation_galeri"
+        android:icon="@drawable/ic_photo_library"
+        android:title="@string/galeri" />
+
+    <item
+        android:id="@+id/navigation_profil"
+        android:icon="@drawable/ic_person"
+        android:title="@string/profil" />
+
+
+</menu>
