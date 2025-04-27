@@ -5,10 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.kepmmiapp.data.local.entity.KegiatanEntity
+import com.example.kepmmiapp.data.local.entity.RemoteKeys
 
 
 @Database(
-    entities = [KegiatanEntity::class],
+    entities = [KegiatanEntity::class, RemoteKeys::class],
     version = 1,
     exportSchema = false
 )

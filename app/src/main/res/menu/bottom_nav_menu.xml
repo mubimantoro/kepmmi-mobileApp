@@ -13,16 +13,16 @@
 
     <item
         android:id="@+id/navigation_page"
-        android:icon="@drawable/ic_info"
+        android:icon="@drawable/ic_stacks"
         android:title="@string/info" />
 
     <item
-        android:id="@+id/navigation_galeri"
+        android:id="@+id/navigation_pamflet"
         android:icon="@drawable/ic_photo_library"
         android:title="@string/galeri" />
 
     <item
-        android:id="@+id/navigation_profil"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person"
         android:title="@string/profil" />
 

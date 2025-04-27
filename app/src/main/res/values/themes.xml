@@ -12,9 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
-        <style name="roundCorner" parent="">
-            <item name="cornerSize">20%</item>
-        </style>
     </style>
+
+    <style name="roundCorner" parent="">
+        <item name="cornerSize">20%</item>
+    </style>
+
+    <style name="circleImageView">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

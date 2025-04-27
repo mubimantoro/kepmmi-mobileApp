@@ -16,7 +16,7 @@
         android:padding="@dimen/dp_8">
 
         <ImageView
-            android:id="@+id/kegiatanIv"
+            android:id="@+id/gambarKegiatanIv"
             android:layout_width="@dimen/dp_100"
             android:layout_height="@dimen/dp_100"
             android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/categoryTv"
+            android:id="@+id/kategoryTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_rounded"
@@ -50,8 +50,8 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/kegiatanIv"
-            app:layout_constraintTop_toBottomOf="@+id/categoryTv"
+            app:layout_constraintStart_toEndOf="@+id/gambarKegiatanIv"
+            app:layout_constraintTop_toBottomOf="@+id/kategoryTv"
             tools:text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus architecto pariatur voluptate id aut rem." />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_marginTop="@dimen/dp_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/kegiatanIv"
+            app:layout_constraintStart_toEndOf="@+id/gambarKegiatanIv"
             app:layout_constraintTop_toBottomOf="@+id/judulTv"
             tools:text="Administrator . 13 Maret 2024" />
 

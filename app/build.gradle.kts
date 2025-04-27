@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     id("kotlin-parcelize")
+    id ("androidx.navigation.safeargs")
 }
 
 android {
@@ -63,6 +64,12 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
+    // coil
+    implementation(libs.coil)
+
+    // glide
+    implementation(libs.glide)
+
     // paging
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.paging.runtime.ktx)
@@ -73,6 +80,8 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
+    // data store
+    implementation(libs.androidx.datastore.preferences)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
