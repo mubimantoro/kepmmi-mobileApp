@@ -15,14 +15,13 @@
             app:destination="@id/detailKegiatanFragment" />
         <action
             android:id="@+id/action_navigation_home_to_registrasiAnggotaFragment"
-            app:destination="@id/registrasiAnggotaFragment" />
+            app:destination="@id/navigation_registrasi_anggota" />
+        <action
+            android:id="@+id/action_navigation_home_to_nagivation_login"
+            app:destination="@id/nagivation_login" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_galeri"
-        android:name="com.example.kepmmiapp.ui.galeri.GaleriFragment"
-        android:label="fragment_galeri"
-        tools:layout="@layout/fragment_galeri" />
+
     <fragment
         android:id="@+id/navigation_kegiatan"
         android:name="com.example.kepmmiapp.ui.kegiatan.KegiatanFragment"
@@ -32,7 +31,7 @@
         android:id="@+id/navigation_page"
         android:name="com.example.kepmmiapp.ui.page.PageFragment"
         android:label="fragment_page"
-        tools:layout="@layout/fragment_page" >
+        tools:layout="@layout/fragment_page">
         <action
             android:id="@+id/action_navigation_page_to_navigation_pengurus"
             app:destination="@id/navigation_pengurus" />
@@ -40,8 +39,10 @@
             android:id="@+id/action_navigation_page_to_navigation_program_kerja"
             app:destination="@id/navigation_program_kerja" />
         <action
-            android:id="@+id/action_navigation_page_to_navigation_tentang_organisasi"
-            app:destination="@id/navigation_tentang_organisasi" />
+            android:id="@+id/action_navigation_page_to_navigation_profil_organisasi"
+            app:destination="@id/navigation_profil_organisasi" />
+
+
     </fragment>
     <fragment
         android:id="@+id/detailKegiatanFragment"
@@ -56,12 +57,15 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.kepmmiapp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/registrasiAnggotaFragment"
-        android:name="com.example.kepmmiapp.ui.registrasi.RegistrasiAnggotaFragment"
-        android:label="fragment_registrasi_anggota"
-        tools:layout="@layout/fragment_registrasi_anggota" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_nagivation_login"
+            app:destination="@id/nagivation_login" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_edit_profile"
+            app:destination="@id/navigation_edit_profile" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_pamflet"
         android:name="com.example.kepmmiapp.ui.pamflet.PamfletFragment"
@@ -72,14 +76,86 @@
         android:name="com.example.kepmmiapp.ui.page.pengurus.PengurusFragment"
         android:label="fragment_pengurus"
         tools:layout="@layout/fragment_pengurus" />
-    <fragment
-        android:id="@+id/navigation_tentang_organisasi"
-        android:name="com.example.kepmmiapp.ui.page.tentangOrganisasi.TentangOrganisasiFragment"
-        android:label="fragment_tentang_organisasi"
-        tools:layout="@layout/fragment_tentang_organisasi" />
+
     <fragment
         android:id="@+id/navigation_program_kerja"
         android:name="com.example.kepmmiapp.ui.page.programkerja.ProgramKerjaFragment"
         android:label="fragment_program_kerja"
         tools:layout="@layout/fragment_program_kerja" />
+    <fragment
+        android:id="@+id/navigation_profil_organisasi"
+        android:name="com.example.kepmmiapp.ui.page.profilorganisasi.ProfilOrganisasiFragment"
+        android:label="fragment_profil_organisasi"
+        tools:layout="@layout/fragment_profil_organisasi" />
+    <fragment
+        android:id="@+id/navigation_registrasi_anggota"
+        android:name="com.example.kepmmiapp.ui.registrasianggota.RegistrasiAnggotaFragment"
+        android:label="fragment_registrasi_anggota"
+        tools:layout="@layout/fragment_registrasi_anggota">
+        <action
+            android:id="@+id/action_navigation_registrasi_anggota_to_navigation_edit_profile"
+            app:destination="@id/navigation_edit_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_edit_profile"
+        android:name="com.example.kepmmiapp.ui.profile.edit.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+        <argument
+            android:name="namaLengkap"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="alamat"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="tempatLahir"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="tanggalLahir"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="asalKampus"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="jurusan"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="angkatanAkademik"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="asalDaerah"
+            app:argType="string"
+            app:nullable="true" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/nagivation_login"
+        android:name="com.example.kepmmiapp.ui.auth.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_nagivation_login_to_navigation_register"
+            app:destination="@id/navigation_register" />
+        <action
+            android:id="@+id/action_nagivation_login_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.example.kepmmiapp.ui.auth.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>

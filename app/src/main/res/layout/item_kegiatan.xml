@@ -26,7 +26,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/kategoryTv"
+            android:id="@+id/categoryTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_rounded"
@@ -51,7 +51,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gambarKegiatanIv"
-            app:layout_constraintTop_toBottomOf="@+id/kategoryTv"
+            app:layout_constraintTop_toBottomOf="@+id/categoryTv"
             tools:text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus architecto pariatur voluptate id aut rem." />
 
         <TextView

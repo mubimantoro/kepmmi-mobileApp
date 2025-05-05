@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/dp_12"
     app:cardElevation="@dimen/dp_4">
 
@@ -34,23 +34,146 @@
             tools:layout_editor_absoluteX="16dp" />
 
         <TextView
-            android:id="@+id/alamatTv"
-            android:layout_width="match_parent"
+            android:id="@+id/alamatLabelTv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_12"
             android:text="@string/alamat"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            tools:layout_editor_absoluteX="16dp" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/alamatTv"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/alamatLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/alamatLabelTv"
+            tools:text="Jl. Ganesha No. 10" />
+
+        <TextView
+            android:id="@+id/tempatLahirLabelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@string/tempat_lahir"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alamatTv" />
 
         <TextView
             android:id="@+id/tempatLahirTv"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            android:text="@string/tempat_lahir"
+            android:layout_marginStart="@dimen/dp_8"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tempatLahirLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/tempatLahirLabelTv"
+            tools:text="Kendari" />
+
+        <TextView
+            android:id="@+id/tanggalLahirLabelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@string/tanggal_lahir"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alamatTv" />
+            app:layout_constraintTop_toBottomOf="@+id/tempatLahirTv" />
+
+        <TextView
+            android:id="@+id/tanggalLahirTv"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tanggalLahirLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/tanggalLahirLabelTv"
+            tools:text="2002-09-08" />
+
+
+        <TextView
+            android:id="@+id/asalKampusLabelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@string/asal_kampus"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tanggalLahirTv" />
+
+        <TextView
+            android:id="@+id/asalKampusTv"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/asalKampusLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/asalKampusLabelTv"
+            tools:text="UNG" />
+
+        <TextView
+            android:id="@+id/jurusanLabelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@string/jurusan"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/asalKampusTv" />
+
+        <TextView
+            android:id="@+id/jurusanTv"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/jurusanLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/jurusanLabelTv"
+            tools:text="Sistem Informasi" />
+
+        <TextView
+            android:id="@+id/angkatanAkademikLabelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@string/angkatan_akademik"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jurusanTv" />
+
+        <TextView
+            android:id="@+id/angkatanAkademikTv"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/angkatanAkademikLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/angkatanAkademikLabelTv"
+            tools:text="2020" />
+
+        <TextView
+            android:id="@+id/asalDaerahLabelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@string/asal_daerah"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/angkatanAkademikTv" />
+
+        <TextView
+            android:id="@+id/asalDaerahTv"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/asalDaerahLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/asalDaerahLabelTv"
+            tools:text="Kendari" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

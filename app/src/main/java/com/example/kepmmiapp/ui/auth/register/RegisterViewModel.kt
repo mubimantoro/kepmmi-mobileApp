@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kepmmiapp.data.Result
-import com.example.kepmmiapp.data.remote.response.RegisterResponse
-import com.example.kepmmiapp.data.repository.KepmmiRepository
+import com.example.kepmmiapp.data.remote.response.RegisterResponseItem
+import com.example.kepmmiapp.data.repository.AuthRepository
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val kepmmiRepository: KepmmiRepository) : ViewModel() {
+class RegisterViewModel(private val repository: AuthRepository) : ViewModel() {
     private val _registerResult =
-        MutableLiveData<Result<RegisterResponse>>()
-    val registerResult: LiveData<Result<RegisterResponse>> = _registerResult
+        MutableLiveData<Result<RegisterResponseItem>>()
+    val registerResult: LiveData<Result<RegisterResponseItem>> = _registerResult
 
     fun register(
         namaLengkap: String,
@@ -20,7 +20,7 @@ class RegisterViewModel(private val kepmmiRepository: KepmmiRepository) : ViewMo
         password: String,
     ) {
         viewModelScope.launch {
-            kepmmiRepository.register(namaLengkap, email, password).collect {
+            repository.register(namaLengkap, email, password).collect {
                 _registerResult.value = it
             }
         }

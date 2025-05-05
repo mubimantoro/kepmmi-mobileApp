@@ -12,7 +12,6 @@ import java.io.IOException
 class KegiatanPagingSource(
     private val apiService: ApiService,
     private val kepmmiDatabase: KepmmiDatabase,
-    private val search: String
 ) : PagingSource<Int, KegiatanEntity>() {
 
     private companion object {
@@ -29,17 +28,17 @@ class KegiatanPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, KegiatanEntity> {
         return try {
             val position = params.key ?: INITIAL_PAGE_INDEX
-            val response = apiService.getKegiatan(page = position, search = search)
-            val result = DataMapper.mapKegiatanResponseToKegiatanEntity(response.data.data)
+            val response = apiService.getKegiatan(page = position)
+            val result = DataMapper.mapKegiatanResponseItemToKegiatanEntity(response.data.data)
             LoadResult.Page(
                 data = result,
                 prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
                 nextKey = if (response.data.data.isEmpty()) null else position + 1
             )
-        }catch (exc: IOException) {
-            return  LoadResult.Error(exc)
-        }catch (exc: HttpException) {
-            return  LoadResult.Error(exc)
+        } catch (exc: IOException) {
+            return LoadResult.Error(exc)
+        } catch (exc: HttpException) {
+            return LoadResult.Error(exc)
         }
     }
 }

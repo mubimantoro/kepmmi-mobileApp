@@ -1,25 +1,24 @@
 package com.example.kepmmiapp.data.remote.retrofit
 
+import com.example.kepmmiapp.data.remote.response.CategoryResponseItem
 import com.example.kepmmiapp.data.remote.response.CommonResponse
-import com.example.kepmmiapp.data.remote.response.KategoriResponse
-import com.example.kepmmiapp.data.remote.response.KegiatanResponse
-import com.example.kepmmiapp.data.remote.response.LoginResponse
+import com.example.kepmmiapp.data.remote.response.KegiatanResponseItem
+import com.example.kepmmiapp.data.remote.response.LoginResponseItem
 import com.example.kepmmiapp.data.remote.response.PagingResponse
 import com.example.kepmmiapp.data.remote.response.PamfletResponseItem
-import com.example.kepmmiapp.data.remote.response.PeriodeRekrutmenResponse
-import com.example.kepmmiapp.data.remote.response.ProfileData
-import com.example.kepmmiapp.data.remote.response.ProfileResponse
+import com.example.kepmmiapp.data.remote.response.PeriodeRekrutmenAnggotaResponseItem
+import com.example.kepmmiapp.data.remote.response.ProfilOrganisasiResponseItem
 import com.example.kepmmiapp.data.remote.response.ProgramKerjaResponseItem
-import com.example.kepmmiapp.data.remote.response.RegisterResponse
-import com.example.kepmmiapp.data.remote.response.RegistrasiAnggotaResponse
-import com.example.kepmmiapp.data.remote.response.SliderResponse
-import com.example.kepmmiapp.data.remote.response.UserResponse
+import com.example.kepmmiapp.data.remote.response.RegisterResponseItem
+import com.example.kepmmiapp.data.remote.response.RegistrasiAnggotaResponseItem
+import com.example.kepmmiapp.data.remote.response.SliderResponseItem
+import com.example.kepmmiapp.data.remote.response.UserResponseItem
 import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -29,30 +28,43 @@ interface ApiService {
     suspend fun register(
         @Field("nama_lengkap") namaLengkap: String,
         @Field("email") email: String,
-        @Field("password") password: String,
-    ): RegisterResponse
+        @Field("password") password: String
+    ): RegisterResponseItem
 
     @FormUrlEncoded
     @POST("login")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): LoginResponse
+    ): LoginResponseItem
 
-    @GET("periode-rekrutmen")
-    suspend fun getPeriodeRekrutmen(
+    @GET("public/sliders")
+    suspend fun getSlider(): CommonResponse<List<SliderResponseItem>>
+
+    @GET("public/kegiatan-home")
+    suspend fun getKegiatanHome(): CommonResponse<List<KegiatanResponseItem>>
+
+    @GET("periode-rekrutmen/active")
+    suspend fun getActivePeriode(
         @Header("Authorization") jwtToken: String
-    ): CommonResponse<PeriodeRekrutmenResponse>
+    ): CommonResponse<PeriodeRekrutmenAnggotaResponseItem>
 
     @GET("profile")
     suspend fun getProfile(
         @Header("Authorization") jwtToken: String
-    ): CommonResponse<UserResponse>
+    ): CommonResponse<UserResponseItem>
 
-    @GET("public/sliders")
-    suspend fun getSlider(): CommonResponse<List<SliderResponse>>
+    @FormUrlEncoded
+    @POST("profile/update")
+    suspend fun updateProfile(
+        @Header("Authorization") jwtToken: String,
+        @FieldMap profileData: Map<String, String>
+    ): CommonResponse<UserResponseItem>
 
-
+    @POST("rekrutmen-anggota/daftar")
+    suspend fun registrasiAnggota(
+        @Header("Authorization") jwtToken: String
+    ): CommonResponse<RegistrasiAnggotaResponseItem>
 
     @GET("public/pamflet")
     suspend fun getPamflet(
@@ -62,40 +74,21 @@ interface ApiService {
     @GET("public/categories")
     suspend fun getCategory(
         @Query("page") page: Int
-    ): CommonResponse<PagingResponse<KategoriResponse>>
-
-    @GET("public/kegiatan/{slug}")
-    suspend fun getDetailKegiatan(
-        @Path("slug") slug: String
-    ): CommonResponse<KegiatanResponse>
-
-    @POST("rekrutmen-anggota/daftar")
-    suspend fun registrasiAnggota(
-        @Header("Authorization") jwtToken: String
-    ): CommonResponse<RegistrasiAnggotaResponse>
-
-    @FormUrlEncoded
-    @POST("profile/update")
-    suspend fun updateProfil(
-        @Header("Authorization") jwtToken: String,
-        @Field("alamat") alamat: String,
-        @Field("tempat_lahir") tempatLahir: String,
-        @Field("tanggal_lahir") tanggalLahir: String,
-        @Field("asal_kampus") asalKampus: String,
-        @Field("jurusan") jurusan: String,
-        @Field("angkatan_akademik") angkatanAkademik: String,
-        @Field("asal_daerah") asalDaerah: String
-    ): CommonResponse<RegistrasiAnggotaResponse>
+    ): CommonResponse<PagingResponse<CategoryResponseItem>>
 
     @GET("public/kegiatan")
     suspend fun getKegiatan(
         @Query("page") page: Int,
-        @Query("search") search: String = ""
-    ): CommonResponse<PagingResponse<KegiatanResponse>>
+    ): CommonResponse<PagingResponse<KegiatanResponseItem>>
+
 
     @GET("public/program-kerja")
     suspend fun getProgramKerja(
         @Query("page") page: Int,
     ): CommonResponse<PagingResponse<ProgramKerjaResponseItem>>
+
+    @GET("public/profil-organisasi")
+    suspend fun getProfilOrganisasi(): CommonResponse<List<ProfilOrganisasiResponseItem>>
+
 
 }

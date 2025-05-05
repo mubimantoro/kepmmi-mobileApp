@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kepmmiapp.adapter.PamfletAdapter
 import com.example.kepmmiapp.databinding.FragmentPamfletBinding
-import com.example.kepmmiapp.ui.ViewModelFactory
+import com.example.kepmmiapp.ui.KepmmiViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -21,7 +21,7 @@ class PamfletFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: PamfletViewModel by viewModels {
-        ViewModelFactory.getInstance(requireContext())
+        KepmmiViewModelFactory.getInstance(requireContext())
     }
 
     private lateinit var pamfletAdapter: PamfletAdapter

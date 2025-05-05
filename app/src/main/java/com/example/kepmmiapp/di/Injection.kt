@@ -9,23 +9,34 @@ import com.example.kepmmiapp.data.datastore.UserPreferences
 import com.example.kepmmiapp.data.local.room.KepmmiDatabase
 import com.example.kepmmiapp.data.remote.retrofit.ApiConfig
 import com.example.kepmmiapp.data.remote.retrofit.ApiService
+import com.example.kepmmiapp.data.repository.AuthRepository
 import com.example.kepmmiapp.data.repository.KepmmiRepository
 
 private const val USER_PREFERENCES = "user_preferences"
 
 object Injection {
-    fun provideRepository(context: Context): KepmmiRepository {
+    fun provideKepmmiRepository(context: Context): KepmmiRepository {
+        val userPreferences = provideUserPreferences(context)
         return KepmmiRepository.getInstance(
-            provideApiService(),
+            provideApiService(userPreferences),
             provideDatabase(context),
-            provideUserPreferences(context)
+            userPreferences
+        )
+    }
+
+    fun provideAuthRepository(context: Context): AuthRepository {
+        val userPreferences = provideUserPreferences(context)
+        return AuthRepository.getInstance(
+            provideApiService(userPreferences),
+            userPreferences
         )
     }
 
     private fun provideDatabase(context: Context): KepmmiDatabase =
         KepmmiDatabase.getInstance(context)
 
-    private fun provideApiService(): ApiService = ApiConfig.getApiService()
+    private fun provideApiService(userPreferences: UserPreferences): ApiService =
+        ApiConfig.getApiService(userPreferences)
 
     private fun provideUserPreferences(context: Context): UserPreferences =
         UserPreferences.getInstance(

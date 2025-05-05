@@ -2,27 +2,27 @@ package com.example.kepmmiapp.data.local.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.kepmmiapp.data.remote.response.KategoriResponse
+import com.example.kepmmiapp.data.remote.response.CategoryResponseItem
 import com.example.kepmmiapp.data.remote.retrofit.ApiService
 import retrofit2.HttpException
 import java.io.IOException
 
 class CategoryPagingSource(
     private val apiService: ApiService
-) : PagingSource<Int, KategoriResponse>() {
+) : PagingSource<Int, CategoryResponseItem>() {
 
     private companion object {
         const val INITIAL_PAGE_INDEX = 1
     }
 
-    override fun getRefreshKey(state: PagingState<Int, KategoriResponse>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, CategoryResponseItem>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, KategoriResponse> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CategoryResponseItem> {
         return try {
             val position = params.key ?: INITIAL_PAGE_INDEX
             val response = apiService.getCategory(page = position)

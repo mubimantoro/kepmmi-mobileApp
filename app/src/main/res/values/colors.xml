@@ -14,6 +14,7 @@
     <color name="green_500">#4CAF50</color>
     <color name="red_500">#F44336</color>
     <color name="gradient_start">#3F51B5</color>
+    <color name="yellow">#FFF085</color>
     <color name="gradient_end">#2196F3</color>
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>

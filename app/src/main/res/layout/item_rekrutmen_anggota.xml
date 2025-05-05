@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:focusable="true"
-    app:cardCornerRadius="@dimen/dp_16"
-    app:cardElevation="@dimen/dp_6"
+    app:cardCornerRadius="@dimen/dp_8"
+    app:cardElevation="@dimen/dp_4"
     app:rippleColor="@color/color_card">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,18 +21,18 @@
             android:layout_height="wrap_content"
             android:text="@string/rekrutmen_anggota"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/subtitleTv"
+            android:id="@+id/descriptionTv"
             android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
-            android:text="@string/subtitle_rekrutmen_anggota"
+            android:text="@string/description_rekrutmen_anggota"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleTv" />
@@ -48,7 +48,7 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subtitleTv"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTv"
             tools:text="Aktif" />
 
         <View
@@ -68,7 +68,8 @@
             android:layout_marginTop="@dimen/dp_12"
             android:src="@drawable/ic_calendar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:ignore="ContentDescription" />
 
 
         <TextView
@@ -82,7 +83,7 @@
             tools:text="22 April 2025 - 22 Mei 2025" />
 
         <Button
-            android:id="@+id/DaftarSekarangBtn"
+            android:id="@+id/daftarSekarangBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_14"

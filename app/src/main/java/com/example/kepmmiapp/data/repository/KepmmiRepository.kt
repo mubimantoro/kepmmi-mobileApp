@@ -1,7 +1,5 @@
 package com.example.kepmmiapp.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -11,22 +9,20 @@ import com.example.kepmmiapp.data.datastore.UserModel
 import com.example.kepmmiapp.data.datastore.UserPreferences
 import com.example.kepmmiapp.data.local.entity.KegiatanEntity
 import com.example.kepmmiapp.data.local.paging.CategoryPagingSource
-import com.example.kepmmiapp.data.local.paging.KegiatanPagingSource
 import com.example.kepmmiapp.data.local.paging.KepmmiRemoteMediator
 import com.example.kepmmiapp.data.local.paging.PamfletPagingSource
 import com.example.kepmmiapp.data.local.paging.ProgramKerjaPagingSource
 import com.example.kepmmiapp.data.local.room.KepmmiDatabase
+import com.example.kepmmiapp.data.remote.response.CategoryResponseItem
 import com.example.kepmmiapp.data.remote.response.CommonResponse
-import com.example.kepmmiapp.data.remote.response.KategoriResponse
-import com.example.kepmmiapp.data.remote.response.KegiatanResponse
-import com.example.kepmmiapp.data.remote.response.LoginResponse
+import com.example.kepmmiapp.data.remote.response.KegiatanResponseItem
 import com.example.kepmmiapp.data.remote.response.PamfletResponseItem
-import com.example.kepmmiapp.data.remote.response.PeriodeRekrutmenResponse
+import com.example.kepmmiapp.data.remote.response.PeriodeRekrutmenAnggotaResponseItem
+import com.example.kepmmiapp.data.remote.response.ProfilOrganisasiResponseItem
 import com.example.kepmmiapp.data.remote.response.ProgramKerjaResponseItem
-import com.example.kepmmiapp.data.remote.response.RegisterResponse
-import com.example.kepmmiapp.data.remote.response.RegistrasiAnggotaResponse
-import com.example.kepmmiapp.data.remote.response.SliderResponse
-import com.example.kepmmiapp.data.remote.response.UserResponse
+import com.example.kepmmiapp.data.remote.response.RegistrasiAnggotaResponseItem
+import com.example.kepmmiapp.data.remote.response.SliderResponseItem
+import com.example.kepmmiapp.data.remote.response.UserResponseItem
 import com.example.kepmmiapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -41,19 +37,22 @@ class KepmmiRepository(
     private val userPreferences: UserPreferences
 ) {
 
-    suspend fun getSlider(): CommonResponse<List<SliderResponse>> = apiService.getSlider()
+    suspend fun getSlider(): CommonResponse<List<SliderResponseItem>> = apiService.getSlider()
 
-    fun getKegiatan(): Flow<PagingData<KegiatanEntity>> {
-        @OptIn(ExperimentalPagingApi::class)
-        return Pager(
-            config = PagingConfig(
-                pageSize = PAGE_SIZE_ITEM
-            ),
-            remoteMediator = KepmmiRemoteMediator(apiService, kepmmiDatabase),
-            pagingSourceFactory = {
-                kepmmiDatabase.kepmmiDao().getKegiatan()
+    fun getKegiatanHome(): Flow<Result<List<KegiatanResponseItem>>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getKegiatanHome()
+
+            if (response.success) {
+                emit(Result.Success(response.data))
+            } else {
+                emit(Result.Error(response.message))
             }
-        ).flow
+
+        } catch (e: Exception) {
+            emit(Result.Error(e.toString()))
+        }
     }
 
     fun getProgramKerja(): Flow<PagingData<ProgramKerjaResponseItem>> {
@@ -79,7 +78,7 @@ class KepmmiRepository(
         ).flow
     }
 
-    fun getCategory(): Flow<PagingData<KategoriResponse>> {
+    fun getCategory(): Flow<PagingData<CategoryResponseItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE_ITEM
@@ -90,38 +89,26 @@ class KepmmiRepository(
         ).flow
     }
 
-    fun getDetailKegiatan(slug: String): LiveData<Result<KegiatanResponse>> = liveData {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getDetailKegiatan(slug)
-            emit(Result.Success(response.data))
-        } catch (e: Exception) {
-            emit(Result.Error(e.toString()))
-        }
-    }
-
-    fun searchKegiatan(search: String): Flow<PagingData<KegiatanEntity>> {
+    fun getKegiatan(): Flow<PagingData<KegiatanEntity>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE_ITEM
             ),
+            remoteMediator = KepmmiRemoteMediator(apiService, kepmmiDatabase),
             pagingSourceFactory = {
-                KegiatanPagingSource(apiService, kepmmiDatabase, search)
+                kepmmiDatabase.kepmmiDao().getKegiatan()
             }
         ).flow
     }
 
-    fun register(
-        namaLengkap: String,
-        email: String,
-        password: String,
-    ): Flow<Result<RegisterResponse>> = flow {
+    fun getProfilOrganisasi(): Flow<Result<List<ProfilOrganisasiResponseItem>>> = flow {
         emit(Result.Loading)
         try {
-            val response = apiService.register(namaLengkap, email, password)
+            val response = apiService.getProfilOrganisasi()
 
             if (response.success) {
-                emit(Result.Success(response))
+                emit(Result.Success(response.data))
             } else {
                 emit(Result.Error(response.message))
             }
@@ -131,30 +118,23 @@ class KepmmiRepository(
         }
     }
 
-    fun login(
-        email: String,
-        password: String
-    ): Flow<Result<LoginResponse>> = flow {
+    fun getActivePeriode(): Flow<Result<PeriodeRekrutmenAnggotaResponseItem>> = flow {
         emit(Result.Loading)
         try {
-            val response = apiService.login(email, password)
+            val session = userPreferences.getSession().first()
+            val response = apiService.getActivePeriode("Bearer ${session.jwtToken}")
 
             if (response.success) {
-                emit(Result.Success(response))
-
-            }
-
-        } catch (e: Exception) {
-            if (e is HttpException) {
-                val errorBody = e.response()?.errorBody()?.string()
-                emit(Result.Error("Login gagal: $errorBody"))
+                emit(Result.Success(response.data))
             } else {
-                emit(Result.Error(e.toString()))
+                emit(Result.Error(response.message))
             }
+        } catch (e: Exception) {
+            emit(Result.Error(e.toString()))
         }
     }
 
-    fun registrasiAnggota(): Flow<Result<RegistrasiAnggotaResponse>> = flow {
+    fun registrasiAnggota(): Flow<Result<RegistrasiAnggotaResponseItem>> = flow {
         emit(Result.Loading)
         try {
             val session = userPreferences.getSession().first()
@@ -167,38 +147,16 @@ class KepmmiRepository(
             }
 
         } catch (e: Exception) {
-            emit(Result.Error(e.toString()))
-        }
-    }
-
-    fun getSession(): Flow<UserModel> = userPreferences.getSession()
-
-    suspend fun saveSession(user: UserModel) {
-        userPreferences.saveSession(user)
-    }
-
-
-    suspend fun logout() {
-        userPreferences.logout()
-    }
-
-    fun getPeriodeRekrutmen(): Flow<Result<PeriodeRekrutmenResponse>> = flow {
-        emit(Result.Loading)
-        try {
-            val session = userPreferences.getSession().first()
-            val response = apiService.getPeriodeRekrutmen("Bearer ${session.jwtToken}")
-
-            if (response.success) {
-                emit(Result.Success(response.data))
+            if (e is HttpException) {
+                val errorBody = e.response()?.errorBody()?.string()
+                emit(Result.Error("Pendaftaran gagal: $errorBody"))
             } else {
-                emit(Result.Error(response.message))
+                emit(Result.Error(e.toString()))
             }
-        } catch (e: Exception) {
-            emit(Result.Error(e.toString()))
         }
     }
 
-    fun getProfile(): Flow<Result<UserResponse>> = flow {
+    fun getProfile(): Flow<Result<UserResponseItem>> = flow {
         emit(Result.Loading)
         try {
             val session = userPreferences.getSession().first()
@@ -214,6 +172,35 @@ class KepmmiRepository(
             emit(Result.Error(e.toString()))
         }
     }
+
+    fun updateProfile(profileData: Map<String, String>): Flow<Result<UserResponseItem>> = flow {
+        emit(Result.Loading)
+        try {
+            val session = userPreferences.getSession().first()
+            val response = apiService.updateProfile("Bearer ${session.jwtToken}", profileData)
+
+            if (response.success) {
+                emit(Result.Success(response.data))
+            } else {
+                emit(Result.Error(response.message))
+            }
+
+        } catch (e: Exception) {
+            if (e is HttpException) {
+                val errorBody = e.response()?.errorBody().toString()
+                emit(Result.Error("Update profil gagal: $errorBody"))
+            } else {
+                emit(Result.Error(e.toString()))
+            }
+        }
+    }
+
+    fun getSession(): Flow<UserModel> = userPreferences.getSession()
+
+    suspend fun logout() {
+        userPreferences.logout()
+    }
+
 
     companion object {
         @Volatile

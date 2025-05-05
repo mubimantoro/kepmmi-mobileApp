@@ -13,6 +13,8 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
 
     suspend fun saveSession(user: UserModel) {
         dataStore.edit {
+            it[FULLNAME_KEY] = user.namaLengkap
+            it[EMAIL_KEY] = user.email
             it[JWT_KEY] = user.jwtToken
             it[IS_LOGIN_KEY] = true
         }
@@ -21,6 +23,8 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
     fun getSession(): Flow<UserModel> {
         return dataStore.data.map {
             UserModel(
+                it[FULLNAME_KEY] ?: "",
+                it[EMAIL_KEY] ?: "",
                 it[JWT_KEY] ?: "",
                 it[IS_LOGIN_KEY] ?: false
             )
@@ -34,12 +38,12 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
     }
 
     companion object {
-        private val JWT_KEY = stringPreferencesKey("token")
-        private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
-
-
         @Volatile
         private var instance: UserPreferences? = null
+        private val EMAIL_KEY = stringPreferencesKey("email")
+        private val FULLNAME_KEY = stringPreferencesKey("fullname")
+        private val JWT_KEY = stringPreferencesKey("token")
+        private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreferences =
             instance ?: synchronized(this) {

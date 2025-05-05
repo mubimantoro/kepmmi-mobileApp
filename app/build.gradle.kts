@@ -70,6 +70,12 @@ dependencies {
     // glide
     implementation(libs.glide)
 
+    // swipeRefreshLayout
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // eventBus
+    implementation(libs.eventbus)
+
     // paging
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.paging.runtime.ktx)

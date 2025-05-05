@@ -40,8 +40,8 @@ class PageFragment : Fragment() {
         val pageMenu = listOf(
             PageMenu(
                 id = 1,
-                title = "Tentang Organisasi",
-                destinationType = DestinationType.TENTANG_ORGANISASI
+                title = "Profil Organisasi",
+                destinationType = DestinationType.PROFIL_ORGANISASI
             ),
             PageMenu(
                 id = 2,
@@ -71,8 +71,8 @@ class PageFragment : Fragment() {
 
     private fun navigateToDestination(destinationType: DestinationType) {
         when (destinationType) {
-            DestinationType.TENTANG_ORGANISASI -> {
-                findNavController().navigate(R.id.action_navigation_page_to_navigation_tentang_organisasi)
+            DestinationType.PROFIL_ORGANISASI -> {
+                findNavController().navigate(R.id.action_navigation_page_to_navigation_profil_organisasi)
             }
 
             DestinationType.PROGRAM_KERJA -> {

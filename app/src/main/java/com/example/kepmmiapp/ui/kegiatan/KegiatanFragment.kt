@@ -1,33 +1,39 @@
 package com.example.kepmmiapp.ui.kegiatan
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.kepmmiapp.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kepmmiapp.adapter.CategoryAdapter
+import com.example.kepmmiapp.adapter.KegiatanAdapter
+import com.example.kepmmiapp.data.local.entity.KegiatanEntity
+import com.example.kepmmiapp.databinding.FragmentKegiatanBinding
+import com.example.kepmmiapp.ui.KepmmiViewModelFactory
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [KegiatanFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class KegiatanFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentKegiatanBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel by viewModels<KegiatanViewModel> {
+        KepmmiViewModelFactory.getInstance(requireContext())
+    }
+
+    private val categoryAdapter by lazy {
+        CategoryAdapter()
+    }
+
+
+    private val kegiatanAdapter by lazy {
+        KegiatanAdapter({ kegiatan ->
+            detailKegiatan(kegiatan)
+        })
     }
 
     override fun onCreateView(
@@ -35,26 +41,72 @@ class KegiatanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kegiatan, container, false)
+        _binding = FragmentKegiatanBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment KegiatanFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            KegiatanFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupSwipeRefresh()
+        setupRv()
+        setupObserver()
+
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            refreshData()
+        }
+    }
+
+    private fun refreshData() {
+        categoryAdapter.refresh()
+        kegiatanAdapter.refresh()
+
+        binding.swipeRefresh.isRefreshing = false
+    }
+
+    private fun setupRv() {
+
+        binding.apply {
+
+            categoryRv.apply {
+                adapter = categoryAdapter
+                setHasFixedSize(false)
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
+
+            kegiatanRv.apply {
+                adapter = kegiatanAdapter
+                setHasFixedSize(false)
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
+    }
+
+    private fun setupObserver() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.category.collectLatest {
+                categoryAdapter.submitData(it)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.kegiatan.collectLatest {
+                kegiatanAdapter.submitData(it)
+            }
+        }
+    }
+
+
+    private fun detailKegiatan(kegiatan: KegiatanEntity) {
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

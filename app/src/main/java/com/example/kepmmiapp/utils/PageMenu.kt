@@ -7,7 +7,7 @@ data class PageMenu(
 )
 
 enum class DestinationType {
-    TENTANG_ORGANISASI,
+    PROFIL_ORGANISASI,
     PROGRAM_KERJA,
     PENGURUS
 }

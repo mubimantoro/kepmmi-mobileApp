@@ -13,7 +13,7 @@ import coil3.transform.RoundedCornersTransformation
 import com.example.kepmmiapp.R
 import com.example.kepmmiapp.data.local.entity.KegiatanEntity
 import com.example.kepmmiapp.databinding.ItemKegiatanBinding
-import com.example.kepmmiapp.utils.withDateFormat
+import com.example.kepmmiapp.utils.DateFormatter
 
 class KegiatanAdapter(
     private val onCLick: (kegiatan: KegiatanEntity) -> Unit
@@ -32,8 +32,9 @@ class KegiatanAdapter(
                         transformations(RoundedCornersTransformation(25f))
                     }
                     judulTv.text = it.judul
-                    kategoryTv.text = it.kategori
-                    authorDateTv.text = """${it.author} - ${it.createdAt.withDateFormat()}"""
+                    categoryTv.text = it.kategori
+                    authorDateTv.text =
+                        """${it.author} - ${DateFormatter.formatDate(it.createdAt)}"""
 
                 }
             }
@@ -70,5 +71,6 @@ class KegiatanAdapter(
 
         }
     }
+
 
 }

@@ -5,29 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kepmmiapp.data.Result
-import com.example.kepmmiapp.data.datastore.UserModel
-import com.example.kepmmiapp.data.remote.response.LoginResponse
-import com.example.kepmmiapp.data.repository.KepmmiRepository
+import com.example.kepmmiapp.data.remote.response.LoginResponseItem
+import com.example.kepmmiapp.data.repository.AuthRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val kepmmiRepository: KepmmiRepository) : ViewModel() {
+class LoginViewModel(private val repository: AuthRepository) : ViewModel() {
 
-    private val _loginResult = MutableLiveData<Result<LoginResponse>>()
-    val loginResult: LiveData<Result<LoginResponse>> = _loginResult
+    private val _loginResult = MutableLiveData<Result<LoginResponseItem>>()
+    val loginResult: LiveData<Result<LoginResponseItem>> = _loginResult
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            kepmmiRepository.login(email, password).collect {
+            repository.login(email, password).collect {
                 _loginResult.value = it
             }
         }
     }
-
-    fun saveSession(user: UserModel) {
-        viewModelScope.launch {
-            kepmmiRepository.saveSession(user)
-        }
-    }
-
 
 }

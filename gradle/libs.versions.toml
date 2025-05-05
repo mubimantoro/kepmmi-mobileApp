@@ -4,6 +4,7 @@ coil = "3.1.0"
 converterGson = "2.9.0"
 datastorePreferences = "1.1.4"
 dotsindicator = "5.1.0"
+eventbus = "3.3.1"
 glide = "4.16.0"
 kotlin = "2.0.21"
 coreKtx = "1.10.1"
@@ -22,6 +23,7 @@ navigationFragmentKtx = "2.6.0"
 navigationSafeArgsGradlePlugin = "2.8.9"
 navigationUiKtx = "2.6.0"
 retrofit = "2.9.0"
+swiperefreshlayout = "1.1.0"
 viewpager2 = "1.1.0"
 roomKtx = "2.5.2"
 roomPaging = "2.4.0-rc01"
@@ -37,9 +39,11 @@ pagingRuntimeKtx = "3.1.0"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 dotsindicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dotsindicator" }
+eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

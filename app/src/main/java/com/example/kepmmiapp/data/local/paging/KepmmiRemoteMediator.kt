@@ -53,7 +53,7 @@ class KepmmiRemoteMediator(
         try {
             val responseData = apiService.getKegiatan(page = page)
             val endOfPaginationReached = responseData.data.data.isEmpty()
-            val result = DataMapper.mapKegiatanResponseToKegiatanEntity(responseData.data.data)
+            val result = DataMapper.mapKegiatanResponseItemToKegiatanEntity(responseData.data.data)
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {

@@ -9,14 +9,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kepmmiapp.R
-import com.example.kepmmiapp.data.remote.response.SliderResponse
+import com.example.kepmmiapp.data.remote.response.SliderResponseItem
 import com.example.kepmmiapp.databinding.ItemSliderBinding
 
-class SliderAdapter : ListAdapter<SliderResponse, SliderAdapter.SliderViewHolder>(diffCallback) {
+class SliderAdapter :
+    ListAdapter<SliderResponseItem, SliderAdapter.SliderViewHolder>(diffCallback) {
 
     inner class SliderViewHolder(private var binding: ItemSliderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: SliderResponse) {
+        fun bind(item: SliderResponseItem) {
             binding.apply {
                 SliderIv.loadImage(item.gambar)
             }
@@ -44,23 +45,22 @@ class SliderAdapter : ListAdapter<SliderResponse, SliderAdapter.SliderViewHolder
     private fun ImageView.loadImage(url: String) {
         Glide.with(this.context)
             .load(url)
-            .placeholder(R.drawable.ic_refresh)
             .error(R.drawable.ic_broken_image)
             .into(this)
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<SliderResponse>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<SliderResponseItem>() {
             override fun areItemsTheSame(
-                oldItem: SliderResponse,
-                newItem: SliderResponse
+                oldItem: SliderResponseItem,
+                newItem: SliderResponseItem
             ): Boolean =
                 oldItem.id == newItem.id
 
 
             override fun areContentsTheSame(
-                oldItem: SliderResponse,
-                newItem: SliderResponse
+                oldItem: SliderResponseItem,
+                newItem: SliderResponseItem
             ): Boolean =
                 oldItem == newItem
 

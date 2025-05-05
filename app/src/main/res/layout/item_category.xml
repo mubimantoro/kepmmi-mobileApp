@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/kategoriCv"
+    android:id="@+id/CategoryCardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/dp_4"
@@ -18,7 +18,7 @@
         android:paddingVertical="@dimen/dp_2">
 
         <TextView
-            android:id="@+id/KategoriTv"
+            android:id="@+id/categoryLabelTv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
