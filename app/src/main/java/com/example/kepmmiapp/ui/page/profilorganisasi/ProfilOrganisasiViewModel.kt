@@ -7,29 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.kepmmiapp.data.Result
 import com.example.kepmmiapp.data.remote.response.ProfilOrganisasiResponseItem
 import com.example.kepmmiapp.data.repository.KepmmiRepository
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class ProfilOrganisasiViewModel(private val repository: KepmmiRepository) : ViewModel() {
 
-    private val _profilOrganisasiResult =
-        MutableLiveData<Result<List<ProfilOrganisasiResponseItem>>>()
-    val profilOrganisasiResult: LiveData<Result<List<ProfilOrganisasiResponseItem>>> =
-        _profilOrganisasiResult
+    private val _profilOrganisasi =
+        MutableLiveData<Result<ProfilOrganisasiResponseItem>>()
+    val profilOrganisasi: LiveData<Result<ProfilOrganisasiResponseItem>> =
+        _profilOrganisasi
 
     fun getProfilOrganisasi() {
         viewModelScope.launch {
-            repository.getProfilOrganisasi()
-                .onStart {
-                    _profilOrganisasiResult.value = Result.Loading
-                }
-                .catch { exc ->
-                    _profilOrganisasiResult.value = Result.Error(exc.message ?: "Terjadi Kesalahan")
-                }
-                .collect {
-                    _profilOrganisasiResult.value = it
-                }
+            repository.getProfilOrganisasi().collect {
+                _profilOrganisasi.value = it
+            }
         }
     }
 }

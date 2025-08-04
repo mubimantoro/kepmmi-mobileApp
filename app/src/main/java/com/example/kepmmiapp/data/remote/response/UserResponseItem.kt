@@ -26,4 +26,7 @@ data class UserResponseItem(
 
     @field:SerializedName("profile")
     val profile: ProfileResponseItem? = null,
+
+    @field:SerializedName("anggota")
+    val anggota: AnggotaResponseItem? = null,
 )

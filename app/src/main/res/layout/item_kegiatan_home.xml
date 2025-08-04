@@ -17,7 +17,7 @@
             android:id="@+id/gambarKegiatanIv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_120"
-            android:contentDescription="@string/kegiatan_image"
+            android:contentDescription="@string/image_kegiatan_label"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

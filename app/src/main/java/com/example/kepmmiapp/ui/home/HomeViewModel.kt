@@ -22,8 +22,8 @@ class HomeViewModel(
     val sliderResult: LiveData<List<SliderResponseItem>> get() = _sliderResult
 
     private val _periodeRekrutmenResult =
-        MutableLiveData<Result<PeriodeRekrutmenAnggotaResponseItem>>(Result.Loading)
-    val periodeRekrutmenResult: LiveData<Result<PeriodeRekrutmenAnggotaResponseItem>> =
+        MutableLiveData<Result<PeriodeRekrutmenAnggotaResponseItem?>>(Result.Loading)
+    val periodeRekrutmenResult: LiveData<Result<PeriodeRekrutmenAnggotaResponseItem?>> =
         _periodeRekrutmenResult
 
     private val _kegiatanHomeResult = MutableLiveData<Result<List<KegiatanResponseItem>>>()

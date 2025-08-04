@@ -5,23 +5,23 @@ import com.google.gson.annotations.SerializedName
 
 data class PeriodeRekrutmenAnggotaResponseItem(
     @field:SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
 
     @field:SerializedName("nama")
-    val nama: String,
+    val nama: String? = null,
 
     @field:SerializedName("tanggal_mulai")
-    val tanggalMulai: String,
+    val tanggalMulai: String? = null,
 
     @field:SerializedName("tanggal_selesai")
-    val tanggalSelesai: String,
+    val tanggalSelesai: String? = null,
 
     @field:SerializedName("is_aktif")
-    val isAktif: Boolean,
+    val isAktif: Boolean? = null,
 
     @field:SerializedName("created_at")
-    val createdAt: String,
+    val createdAt: String? = null,
 
     @field:SerializedName("updated_at")
-    val updatedAt: String,
+    val updatedAt: String? = null,
 )

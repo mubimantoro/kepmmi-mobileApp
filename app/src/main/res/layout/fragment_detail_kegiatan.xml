@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.detail.DetailKegiatanFragment">
+    tools:context=".ui.kegiatan.DetailKegiatanFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -21,9 +21,8 @@
             android:layout_height="match_parent"
             android:paddingTop="@dimen/dp_8">
 
-
             <TextView
-                android:id="@+id/kategoriDetailTv"
+                android:id="@+id/categoryTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
@@ -36,15 +35,15 @@
                 tools:text="Laravel" />
 
             <TextView
-                android:id="@+id/detailDateTv"
+                android:id="@+id/dateTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/gambarDetailKegiatanTv"
-                app:layout_constraintTop_toTopOf="@+id/kategoriDetailTv"
-                tools:text="13 Maret 2024" />
+                app:layout_constraintEnd_toEndOf="@id/gambarKegiatanTv"
+                app:layout_constraintTop_toTopOf="@id/categoryTv"
+                tools:text="31 Jul 2025" />
 
             <TextView
-                android:id="@+id/judulDetailTv"
+                android:id="@+id/judulTv"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
@@ -53,32 +52,44 @@
                 android:textSize="@dimen/sp_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/kategoriDetailTv"
-                tools:text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus architecto pariatur voluptate id aut rem." />
+                app:layout_constraintTop_toBottomOf="@id/categoryTv"
+                tools:text="How To Run with Your lEgh" />
 
             <ImageView
-                android:id="@+id/gambarDetailKegiatanTv"
+                android:id="@+id/gambarKegiatanTv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_200"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginVertical="@dimen/dp_12"
-                android:contentDescription="@string/kegiatan_image"
+                android:contentDescription="@string/image_kegiatan_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/judulDetailTv"
+                app:layout_constraintTop_toBottomOf="@id/judulTv"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/authorDetailTv"
+                android:id="@+id/authorTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:drawablePadding="@dimen/dp_2"
                 android:gravity="center_vertical"
                 app:drawableStartCompat="@drawable/ic_person"
-                app:layout_constraintStart_toStartOf="@+id/gambarDetailKegiatanTv"
-                app:layout_constraintTop_toBottomOf="@+id/gambarDetailKegiatanTv"
+                app:layout_constraintStart_toStartOf="@id/gambarKegiatanTv"
+                app:layout_constraintTop_toBottomOf="@id/gambarKegiatanTv"
                 tools:text="Administrator" />
+
+            <TextView
+                android:id="@+id/viewsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:drawablePadding="@dimen/dp_2"
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/ic_visibility"
+                app:layout_constraintEnd_toEndOf="@id/gambarKegiatanTv"
+                app:layout_constraintTop_toBottomOf="@id/gambarKegiatanTv"
+                tools:text="123" />
 
             <TextView
                 android:id="@+id/kontenTv"
@@ -88,7 +99,8 @@
                 android:layout_marginTop="@dimen/dp_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/authorDetailTv" />
+                app:layout_constraintTop_toBottomOf="@id/authorTv" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

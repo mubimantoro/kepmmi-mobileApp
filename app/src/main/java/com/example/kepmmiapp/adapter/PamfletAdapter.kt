@@ -16,6 +16,11 @@ class PamfletAdapter :
     PagingDataAdapter<PamfletResponseItem, PamfletAdapter.PamfletViewHolder>(diffCallback) {
 
 
+    private var onItemClickListener: ((PamfletResponseItem) -> Unit)? = null
+    fun setOnItemClickListener(listener: (PamfletResponseItem) -> Unit) {
+        onItemClickListener = listener
+    }
+
     override fun onBindViewHolder(holder: PamfletAdapter.PamfletViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
@@ -27,7 +32,9 @@ class PamfletAdapter :
             binding.apply {
                 pamfletIv.loadImage(item.gambar)
                 captionTv.text = Html.fromHtml(item.caption, Html.FROM_HTML_MODE_LEGACY)
-
+                root.setOnClickListener {
+                    onItemClickListener?.invoke(item)
+                }
             }
         }
     }

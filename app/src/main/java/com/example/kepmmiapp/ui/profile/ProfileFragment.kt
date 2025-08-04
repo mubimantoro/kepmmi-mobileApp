@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.kepmmiapp.R
 import com.example.kepmmiapp.data.Result
 import com.example.kepmmiapp.data.remote.response.UserResponseItem
@@ -41,6 +40,17 @@ class ProfileFragment : Fragment() {
 
         setupObserver()
         setupClickListener()
+        setupSwipeRefresh()
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.apply {
+                getProfile()
+                getStatusAnggota()
+            }
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun setupClickListener() {
@@ -50,6 +60,10 @@ class ProfileFragment : Fragment() {
 
         binding.editProfileBtn.setOnClickListener {
             navigateToEditProfile()
+        }
+
+        binding.riwayatRegistrasiAnggotaBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_navigation_riwayat_registrasi_anggota)
         }
     }
 
@@ -111,22 +125,26 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        viewModel.statusAnggotaResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {}
+                is Result.Success -> {
+                    val statusAnggota =
+                        result.data.anggota?.jenisAnggota?.nama ?: "Belum Terverifikasi"
+                    binding.itemCardAnggota.statusAnggotaTv.text = statusAnggota
+                }
+
+                is Result.Error -> {}
+            }
+
+        }
+
     }
 
     private fun populateProfileData(userData: UserResponseItem) {
         binding.itemCardAnggota.apply {
             namaLengkapTv.text = userData.namaLengkap
             emailTv.text = userData.email
-
-
-            if (!userData.avatar.isNullOrEmpty()) {
-                Glide.with(this@ProfileFragment)
-                    .load(userData.avatar)
-                    .circleCrop()
-                    .into(avatarIv)
-            } else {
-                avatarIv.setImageResource(R.drawable.ic_person)
-            }
         }
 
         binding.itemCardProfile.apply {

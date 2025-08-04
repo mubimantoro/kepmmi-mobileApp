@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="@dimen/dp_8">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header dengan Status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- Nama Program Kerja -->
+                <TextView
+                    android:id="@+id/tvNamaProgramKerja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="2dp"
+                    android:maxLines="2"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="Pengembangan Aplikasi Mobile KEPEMMI" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/statusTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_status_default"
+                android:paddingHorizontal="@dimen/dp_8"
+                android:paddingVertical="@dimen/dp_2"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Aktif" />
+
+
+        </LinearLayout>
+
+        <!-- Bidang -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_work"
+                app:tint="@color/green" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bidang_organisasi_label"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvBidang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:textSize="14sp"
+                tools:text="Teknologi Informasi" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

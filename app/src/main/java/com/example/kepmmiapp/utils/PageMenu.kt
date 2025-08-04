@@ -9,5 +9,5 @@ data class PageMenu(
 enum class DestinationType {
     PROFIL_ORGANISASI,
     PROGRAM_KERJA,
-    PENGURUS
+    STRUKTUR_ORGANISASI
 }

@@ -115,19 +115,7 @@ class HomeFragment : Fragment() {
                     }
 
                     is Result.Success -> {
-                        val periodeData = result.data
-
-                        binding.itemRekrutmenAnggota.apply {
-                            statusPeriodeTv.text =
-                                if (periodeData.isAktif) getString(R.string.periode_aktif) else getString(
-                                    R.string.periode_nonaktif
-                                )
-                            periodeDaftarTv.text =
-                                "${DateFormatter.formatDate(periodeData.tanggalMulai)} - ${
-                                    DateFormatter.formatDate(periodeData.tanggalSelesai)
-                                }"
-                            daftarSekarangBtn.isEnabled = periodeData.isAktif
-                        }
+                        fetchPeriodeRekrutmenData(result.data)
                     }
 
                     is Result.Error -> {
@@ -146,6 +134,41 @@ class HomeFragment : Fragment() {
                 if (!user.isLogin) {
                     findNavController().navigate(R.id.action_navigation_home_to_nagivation_login)
                 }
+            }
+        }
+    }
+
+    private fun fetchPeriodeRekrutmenData(item: PeriodeRekrutmenAnggotaResponseItem?) {
+        binding.itemRekrutmenAnggota.apply {
+            when {
+                item == null -> {
+                    statusPeriodeTv.text = getString(R.string.unavailable_periode_rekrutmen_status)
+                    periodeDaftarTv.text = getString(R.string.unavailable_periode_rekrutmen_date)
+                    daftarSekarangBtn.isEnabled = false
+                }
+
+                else -> {
+
+                    statusPeriodeTv.text = if (item.isAktif == true) {
+                        getString(R.string.periode_aktif)
+                    } else {
+                        getString(R.string.periode_nonaktif)
+                    }
+
+                    val startDate = item.tanggalMulai?.let {
+                        DateFormatter.formatDate(it)
+                    } ?: "N/A"
+
+                    val endDate = item.tanggalSelesai?.let {
+                        DateFormatter.formatDate(it)
+                    } ?: "N/A"
+
+                    periodeDaftarTv.text =
+                        getString(R.string.periode_rekrutmen_date, startDate, endDate)
+                    daftarSekarangBtn.isEnabled = true
+                }
+
+
             }
         }
     }
@@ -171,7 +194,7 @@ class HomeFragment : Fragment() {
 
     private fun setupActivePeriodeListener() {
         binding.itemRekrutmenAnggota.daftarSekarangBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_registrasiAnggotaFragment)
+            findNavController().navigate(R.id.action_navigation_home_to_navigation_rekrutmen_anggota)
         }
     }
 

@@ -18,7 +18,7 @@ class ProgramKerjaPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProgramKerjaResponseItem> {
         return try {
             val position = params.key ?: ProgramKerjaPagingSource.INITIAL_PAGE_INDEX
-            val response = apiService.getProgramKerja(page = position)
+            val response = apiService.getProgramKerjaPaging(page = position)
 
             LoadResult.Page(
                 data = response.data.data,

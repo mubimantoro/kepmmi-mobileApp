@@ -99,9 +99,9 @@ class RegistrasiAnggotaFragment : Fragment() {
             viewModel.registrasiAnggota()
         }
 
-        binding.editProfileBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_registrasi_anggota_to_navigation_edit_profile)
-        }
+//        binding.editProfileBtn.setOnClickListener {
+//            findNavController().navigate(R.id.action_navigation_registrasi_anggota_to_navigation_edit_profile)
+//        }
     }
 
     private fun showErrorDialog(errorMessage: String) {

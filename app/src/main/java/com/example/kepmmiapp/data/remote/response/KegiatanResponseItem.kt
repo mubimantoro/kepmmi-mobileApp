@@ -24,6 +24,9 @@ data class KegiatanResponseItem(
     @field:SerializedName("slug")
     val slug: String,
 
+    @field:SerializedName("views_count")
+    val viewsCount: Int = 0,
+
     @field:SerializedName("created_at")
     val createdAt: String,
 
@@ -34,7 +37,6 @@ data class KegiatanResponseItem(
     val kategori: CategoryResponseItem? = null,
 
     @field:SerializedName("user")
-    val user: UserResponseItem,
+    val user: UserResponseItem
 
-
-    )
+)

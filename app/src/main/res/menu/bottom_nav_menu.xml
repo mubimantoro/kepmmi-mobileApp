@@ -19,7 +19,7 @@
     <item
         android:id="@+id/navigation_pamflet"
         android:icon="@drawable/ic_photo_library"
-        android:title="@string/galeri" />
+        android:title="@string/pamflet" />
 
     <item
         android:id="@+id/navigation_profile"

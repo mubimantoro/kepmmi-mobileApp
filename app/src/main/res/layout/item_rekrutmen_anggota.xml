@@ -61,25 +61,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statusPeriodeTv" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_12"
-            android:src="@drawable/ic_calendar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            tools:ignore="ContentDescription" />
-
 
         <TextView
             android:id="@+id/periodeDaftarTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            android:layout_marginTop="@dimen/dp_12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
             tools:text="22 April 2025 - 22 Mei 2025" />
 
         <Button
@@ -90,7 +80,7 @@
             android:text="@string/daftar_sekarang"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/periodeDaftarTv"
             app:shapeAppearance="@style/roundCorner" />
 
 

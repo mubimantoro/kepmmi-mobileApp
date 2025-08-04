@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.kepmmiapp.data.Result
 import com.example.kepmmiapp.data.remote.response.UserResponseItem
 import com.example.kepmmiapp.data.repository.KepmmiRepository
-import com.example.kepmmiapp.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repository: KepmmiRepository) : ViewModel() {
@@ -17,11 +16,15 @@ class ProfileViewModel(private val repository: KepmmiRepository) : ViewModel() {
     private val _updateProfileResult = MutableLiveData<Result<UserResponseItem>>()
     val updateProfileResult: LiveData<Result<UserResponseItem>> = _updateProfileResult
 
+    private val _statusAnggotaResult = MutableLiveData<Result<UserResponseItem>>()
+    val statusAnggotaResult: LiveData<Result<UserResponseItem>> = _statusAnggotaResult
+
     init {
         getProfile()
+        getStatusAnggota()
     }
 
-    private fun getProfile() {
+    fun getProfile() {
         viewModelScope.launch {
             repository.getProfile().collect {
                 _profileResult.value = it
@@ -41,8 +44,12 @@ class ProfileViewModel(private val repository: KepmmiRepository) : ViewModel() {
         }
     }
 
-    fun resetUpdateProfileResult() {
-        _updateProfileResult.value = null
+    fun getStatusAnggota() {
+        viewModelScope.launch {
+            repository.getStatusAnggota().collect {
+                _statusAnggotaResult.value = it
+            }
+        }
     }
 
     fun logout() {

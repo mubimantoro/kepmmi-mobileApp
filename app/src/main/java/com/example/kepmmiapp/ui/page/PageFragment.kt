@@ -50,8 +50,8 @@ class PageFragment : Fragment() {
             ),
             PageMenu(
                 id = 3,
-                title = "Pengurus",
-                destinationType = DestinationType.PENGURUS
+                title = "Struktur Organisasi",
+                destinationType = DestinationType.STRUKTUR_ORGANISASI
             )
 
         )
@@ -79,8 +79,8 @@ class PageFragment : Fragment() {
                 findNavController().navigate(R.id.action_navigation_page_to_navigation_program_kerja)
             }
 
-            DestinationType.PENGURUS -> {
-                findNavController().navigate(R.id.action_navigation_page_to_navigation_pengurus)
+            DestinationType.STRUKTUR_ORGANISASI -> {
+                findNavController().navigate(R.id.action_navigation_page_to_navigation_struktur_organisasi)
             }
         }
     }

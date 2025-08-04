@@ -2,14 +2,11 @@ package com.example.kepmmiapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil3.load
-import coil3.request.crossfade
-import coil3.request.error
-import coil3.request.transformations
-import coil3.transform.RoundedCornersTransformation
+import com.bumptech.glide.Glide
 import com.example.kepmmiapp.R
 import com.example.kepmmiapp.data.local.entity.KegiatanEntity
 import com.example.kepmmiapp.databinding.ItemKegiatanBinding
@@ -19,22 +16,20 @@ class KegiatanAdapter(
     private val onCLick: (kegiatan: KegiatanEntity) -> Unit
 ) : PagingDataAdapter<KegiatanEntity, KegiatanAdapter.KegiatanViewHolder>(diffCallback) {
 
-    class KegiatanViewHolder(private val binding: ItemKegiatanBinding) :
+    inner class KegiatanViewHolder(private val binding: ItemKegiatanBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: KegiatanEntity?) {
             item?.let {
                 with(binding) {
-                    gambarKegiatanIv.load(it.gambar) {
-                        crossfade(true)
-                        crossfade(400)
-                        error(R.drawable.ic_broken_image)
-                        transformations(RoundedCornersTransformation(25f))
-                    }
+                    gambarKegiatanIv.loadImage(it.gambar)
                     judulTv.text = it.judul
                     categoryTv.text = it.kategori
                     authorDateTv.text =
                         """${it.author} - ${DateFormatter.formatDate(it.createdAt)}"""
+                    itemView.setOnClickListener {
+                        onCLick(item)
+                    }
 
                 }
             }
@@ -54,6 +49,14 @@ class KegiatanAdapter(
             ItemKegiatanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
+    private fun ImageView.loadImage(url: String?) {
+        Glide.with(this.context)
+            .load(url)
+            .placeholder(R.drawable.ic_broken_image)
+            .into(this)
+    }
+
+
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<KegiatanEntity>() {
             override fun areItemsTheSame(
@@ -71,6 +74,7 @@ class KegiatanAdapter(
 
         }
     }
+
 
 
 }

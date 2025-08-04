@@ -1,17 +1,20 @@
 package com.example.kepmmiapp.data.remote.retrofit
 
+import com.example.kepmmiapp.data.remote.response.BidangOrganisasiResponseItem
 import com.example.kepmmiapp.data.remote.response.CategoryResponseItem
 import com.example.kepmmiapp.data.remote.response.CommonResponse
 import com.example.kepmmiapp.data.remote.response.KegiatanResponseItem
 import com.example.kepmmiapp.data.remote.response.LoginResponseItem
 import com.example.kepmmiapp.data.remote.response.PagingResponse
 import com.example.kepmmiapp.data.remote.response.PamfletResponseItem
+import com.example.kepmmiapp.data.remote.response.PengurusResponseItem
 import com.example.kepmmiapp.data.remote.response.PeriodeRekrutmenAnggotaResponseItem
 import com.example.kepmmiapp.data.remote.response.ProfilOrganisasiResponseItem
 import com.example.kepmmiapp.data.remote.response.ProgramKerjaResponseItem
 import com.example.kepmmiapp.data.remote.response.RegisterResponseItem
 import com.example.kepmmiapp.data.remote.response.RegistrasiAnggotaResponseItem
 import com.example.kepmmiapp.data.remote.response.SliderResponseItem
+import com.example.kepmmiapp.data.remote.response.StrukturOrganisasiResponseItem
 import com.example.kepmmiapp.data.remote.response.UserResponseItem
 import retrofit2.http.Field
 import retrofit2.http.FieldMap
@@ -19,6 +22,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -66,10 +70,20 @@ interface ApiService {
         @Header("Authorization") jwtToken: String
     ): CommonResponse<RegistrasiAnggotaResponseItem>
 
+    @GET("riwayat-pendaftaran")
+    suspend fun getRiwayatRegistrasiAnggota(
+        @Header("Authorization") jwtToken: String
+    ): CommonResponse<List<RegistrasiAnggotaResponseItem>>
+
     @GET("public/pamflet")
     suspend fun getPamflet(
         @Query("page") page: Int,
     ): CommonResponse<PagingResponse<PamfletResponseItem>>
+
+    @GET("public/pamflet/{id}")
+    suspend fun getPamfletDetail(
+        @Path("id") id: Int
+    ): CommonResponse<PamfletResponseItem>
 
     @GET("public/categories")
     suspend fun getCategory(
@@ -81,14 +95,37 @@ interface ApiService {
         @Query("page") page: Int,
     ): CommonResponse<PagingResponse<KegiatanResponseItem>>
 
+    @GET("public/kegiatan/{slug}")
+    suspend fun getKegiatanDetail(
+        @Path("slug") slug: String
+    ): CommonResponse<KegiatanResponseItem>
 
     @GET("public/program-kerja")
-    suspend fun getProgramKerja(
+    suspend fun getProgramKerjaPaging(
         @Query("page") page: Int,
     ): CommonResponse<PagingResponse<ProgramKerjaResponseItem>>
 
-    @GET("public/profil-organisasi")
-    suspend fun getProfilOrganisasi(): CommonResponse<List<ProfilOrganisasiResponseItem>>
 
+    @GET("public/program-kerja")
+    suspend fun getProgramKerja(): CommonResponse<List<ProgramKerjaResponseItem>>
+
+    @GET("public/bidang")
+    suspend fun getBidang(): CommonResponse<List<BidangOrganisasiResponseItem>>
+
+    @GET("public/profil-organisasi")
+    suspend fun getProfilOrganisasi(): CommonResponse<ProfilOrganisasiResponseItem>
+
+    @GET("public/pengurus")
+    suspend fun getPengurus(
+        @Query("page") page: Int,
+    ): CommonResponse<PagingResponse<PengurusResponseItem>>
+
+    @GET("public/struktur-organisasi")
+    suspend fun getStrukturOrganisasi(): CommonResponse<StrukturOrganisasiResponseItem>
+
+    @GET("anggota")
+    suspend fun getStatusAnggota(
+        @Header("Authorization") jwtToken: String
+    ): CommonResponse<UserResponseItem>
 
 }

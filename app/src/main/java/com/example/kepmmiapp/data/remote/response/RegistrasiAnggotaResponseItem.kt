@@ -13,6 +13,9 @@ data class RegistrasiAnggotaResponseItem(
     @field:SerializedName("periode_rekrutmen_anggota_id")
     val periodeRekrutmenAnggotaId: Int,
 
+    @field:SerializedName("periode_rekrutmen_anggota")
+    val periodeRekrutmenAnggota: PeriodeRekrutmenAnggotaResponseItem? = null,
+
     @field:SerializedName("status")
     val status: String? = null,
 

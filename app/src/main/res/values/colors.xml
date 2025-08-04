@@ -11,12 +11,46 @@
     <color name="grey_200">#EEEEEE</color>
     <color name="grey_500">#9E9E9E</color>
     <color name="color_card">@color/grey_200</color>
-    <color name="green_500">#4CAF50</color>
     <color name="red_500">#F44336</color>
     <color name="gradient_start">#3F51B5</color>
-    <color name="yellow">#FFF085</color>
     <color name="gradient_end">#2196F3</color>
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
+    <color name="green">#188a55</color>
+    <color name="green_dark">#0d4d30</color>
+    <color name="green_light">#22a866</color>
+
+    <color name="yellow">#f3ca35</color>
+    <!-- Status Colors for Membership Badges -->
+    <color name="statusActive">#4CAF50</color>     <!-- Green for active members -->
+    <color name="statusPending">#FF9800</color>    <!-- Orange/Amber for pending status -->
+    <color name="statusInactive">#F44336</color>   <!-- Red for inactive/rejected status -->
+    <color name="statusNeutral">#607D8B</color>    <!-- Blue Grey for neutral status -->
+
+    <!-- Optional Lighter Variants (for text or borders) -->
+    <color name="statusActiveFaded">#A5D6A7</color>
+    <color name="statusPendingFaded">#FFCC80</color>
+    <color name="statusInactiveFaded">#EF9A9A</color>
+    <color name="statusNeutralFaded">#B0BEC5</color>
+
+    <!-- Text Colors for Badges -->
+    <color name="textOnColoredBadge">#FFFFFF</color>   <!-- White text on colored badges -->
+    <color name="textOnLightBadge">#212121</color>     <!-- Dark text on light badges -->
+
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="success_container">#E8F5E8</color>
+    <color name="warning">#FF9800</color>
+    <color name="warning_container">#FFF3E0</color>
+    <color name="error">#F44336</color>
+    <color name="error_container">#FFEBEE</color>
+    <color name="info">#2196F3</color>
+    <color name="info_container">#E3F2FD</color>
+
+    <!-- Surface Colors -->
+    <color name="surface_variant">#F5F5F5</color>
+    <color name="on_surface_variant">#757575</color>
+    <color name="primary_container">#E1F5FE</color>
+    <color name="on_primary">#FFFFFF</color>
 
 </resources>

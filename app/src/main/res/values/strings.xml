@@ -19,7 +19,7 @@
     <string name="info">Info</string>
     <string name="galeri">Galeri</string>
     <string name="loading">Loading...</string>
-    <string name="kegiatan_image">Gambar Kegiatan</string>
+    <string name="image_kegiatan_label">Gambar Kegiatan</string>
     <string name="fullname">Nama Lengkap</string>
     <string name="confirm_password">Konfirmasi Password</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -61,4 +61,16 @@
     <string name="edit_profi">Edit Profi</string>
     <string name="save">Simpan</string>
     <string name="cancel">Batal</string>
+    <string name="foto_pengurus_label">Foto Pengurus</string>
+    <string name="pamflet">Pamflet</string>
+    <string name="unavailable_periode_rekrutmen_date">Belum ada periode rekrutmen yang tersedia.</string>
+    <string name="unavailable_periode_rekrutmen_status">Tidak Tersedia</string>
+    <string name="periode_rekrutmen_date">%1$s - %2$s</string>
+    <string name="riwayat_pendaftaran_anggota_label">Riwayat Pendaftaran Anggota</string>
+    <string name="tanggal_registrasi_anggota_label">Tanggal Daftar: %1$s</string>
+    <string name="cancel_registrasi_anggota_label">Batalkan Pendaftaran</string>
+    <string name="pamflet_image_label">Gambar Pamflet</string>
+    <string name="share_to_whatsapp_label">Share ke WhatsApp</string>
+    <string name="bidang_organisasi_label">Bidang</string>
+    <string name="struktur_organisasi_image_label">Gambar Struktur Organisasi</string>
 </resources>

@@ -12,13 +12,13 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_detailKegiatanFragment"
-            app:destination="@id/detailKegiatanFragment" />
-        <action
-            android:id="@+id/action_navigation_home_to_registrasiAnggotaFragment"
-            app:destination="@id/navigation_registrasi_anggota" />
+            app:destination="@id/navigation_detail_kegiatan" />
         <action
             android:id="@+id/action_navigation_home_to_nagivation_login"
             app:destination="@id/nagivation_login" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_rekrutmen_anggota"
+            app:destination="@id/navigation_rekrutmen_angggota" />
     </fragment>
 
 
@@ -26,33 +26,33 @@
         android:id="@+id/navigation_kegiatan"
         android:name="com.example.kepmmiapp.ui.kegiatan.KegiatanFragment"
         android:label="fragment_kegiatan"
-        tools:layout="@layout/fragment_kegiatan" />
+        tools:layout="@layout/fragment_kegiatan">
+        <action
+            android:id="@+id/action_navigation_kegiatan_to_detailKegiatanFragment"
+            app:destination="@id/navigation_detail_kegiatan" />
+        <argument
+            android:name="slug"
+            app:argType="string"
+            android:defaultValue="slug" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_page"
         android:name="com.example.kepmmiapp.ui.page.PageFragment"
         android:label="fragment_page"
         tools:layout="@layout/fragment_page">
         <action
-            android:id="@+id/action_navigation_page_to_navigation_pengurus"
-            app:destination="@id/navigation_pengurus" />
-        <action
             android:id="@+id/action_navigation_page_to_navigation_program_kerja"
             app:destination="@id/navigation_program_kerja" />
         <action
             android:id="@+id/action_navigation_page_to_navigation_profil_organisasi"
             app:destination="@id/navigation_profil_organisasi" />
+        <action
+            android:id="@+id/action_navigation_page_to_navigation_struktur_organisasi"
+            app:destination="@id/navigation_struktur_organisasi" />
 
 
     </fragment>
-    <fragment
-        android:id="@+id/detailKegiatanFragment"
-        android:name="com.example.kepmmiapp.ui.detail.DetailKegiatanFragment"
-        android:label="fragment_detail_kegiatan"
-        tools:layout="@layout/fragment_detail_kegiatan">
-        <argument
-            android:name="kegiatan"
-            app:argType="com.example.kepmmiapp.data.local.entity.KegiatanEntity" />
-    </fragment>
+
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.kepmmiapp.ui.profile.ProfileFragment"
@@ -64,18 +64,20 @@
         <action
             android:id="@+id/action_navigation_profile_to_navigation_edit_profile"
             app:destination="@id/navigation_edit_profile" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_riwayat_registrasi_anggota"
+            app:destination="@id/navigation_riwayat_registrasi_anggota" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_pamflet"
         android:name="com.example.kepmmiapp.ui.pamflet.PamfletFragment"
         android:label="fragment_pamflet"
-        tools:layout="@layout/fragment_pamflet" />
-    <fragment
-        android:id="@+id/navigation_pengurus"
-        android:name="com.example.kepmmiapp.ui.page.pengurus.PengurusFragment"
-        android:label="fragment_pengurus"
-        tools:layout="@layout/fragment_pengurus" />
+        tools:layout="@layout/fragment_pamflet">
+        <action
+            android:id="@+id/action_navigation_pamflet_to_navigation_detail_pamflet"
+            app:destination="@id/navigation_detail_pamflet" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_program_kerja"
@@ -87,15 +89,6 @@
         android:name="com.example.kepmmiapp.ui.page.profilorganisasi.ProfilOrganisasiFragment"
         android:label="fragment_profil_organisasi"
         tools:layout="@layout/fragment_profil_organisasi" />
-    <fragment
-        android:id="@+id/navigation_registrasi_anggota"
-        android:name="com.example.kepmmiapp.ui.registrasianggota.RegistrasiAnggotaFragment"
-        android:label="fragment_registrasi_anggota"
-        tools:layout="@layout/fragment_registrasi_anggota">
-        <action
-            android:id="@+id/action_navigation_registrasi_anggota_to_navigation_edit_profile"
-            app:destination="@id/navigation_edit_profile" />
-    </fragment>
     <fragment
         android:id="@+id/navigation_edit_profile"
         android:name="com.example.kepmmiapp.ui.profile.edit.EditProfileFragment"
@@ -158,4 +151,37 @@
         android:name="com.example.kepmmiapp.ui.auth.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/navigation_detail_pamflet"
+        android:name="com.example.kepmmiapp.ui.pamflet.DetailPamfletFragment"
+        android:label="fragment_detail_pamflet"
+        tools:layout="@layout/fragment_detail_pamflet">
+        <argument
+            android:name="pamfletId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_riwayat_registrasi_anggota"
+        android:name="com.example.kepmmiapp.ui.riwayat.RiwayatRegistrasiAnggotaFragment"
+        android:label="fragment_riwayat_registrasi_anggota"
+        tools:layout="@layout/fragment_riwayat_registrasi_anggota" />
+    <fragment
+        android:id="@+id/navigation_rekrutmen_angggota"
+        android:name="com.example.kepmmiapp.ui.registrasianggota.RegistrasiAnggotaFragment"
+        android:label="fragment_registrasi_anggota"
+        tools:layout="@layout/fragment_registrasi_anggota" />
+    <fragment
+        android:id="@+id/navigation_struktur_organisasi"
+        android:name="com.example.kepmmiapp.ui.page.strukturorganisasi.StrukturOrganisasiFragment"
+        android:label="fragment_struktur_organisasi"
+        tools:layout="@layout/fragment_struktur_organisasi" />
+    <fragment
+        android:id="@+id/navigation_detail_kegiatan"
+        android:name="com.example.kepmmiapp.ui.kegiatan.DetailKegiatanFragment"
+        android:label="fragment_detail_kegiatan"
+        tools:layout="@layout/fragment_detail_kegiatan">
+        <argument
+            android:name="kegiatan"
+            app:argType="com.example.kepmmiapp.data.local.entity.KegiatanEntity" />
+    </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kepmmiapp.adapter.PamfletAdapter
 import com.example.kepmmiapp.databinding.FragmentPamfletBinding
@@ -40,10 +41,18 @@ class PamfletFragment : Fragment() {
 
         setupRv()
         setupObserver()
+        setupSwipeRefresh()
     }
 
     private fun setupRv() {
         pamfletAdapter = PamfletAdapter()
+
+        pamfletAdapter.setOnItemClickListener { pamflet ->
+            val action =
+                PamfletFragmentDirections.actionNavigationPamfletToNavigationDetailPamflet(pamflet.id)
+            findNavController().navigate(action)
+        }
+
         binding.pamfletRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = pamfletAdapter
@@ -57,5 +66,18 @@ class PamfletFragment : Fragment() {
             }
         }
     }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            pamfletAdapter.refresh()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }
